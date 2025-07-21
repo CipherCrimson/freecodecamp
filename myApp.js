@@ -1,18 +1,21 @@
 const express = require('express');
 const helmet =require('helmet')
 
+ninetyDaysInSeconds = 90*24*60*60;
+
 const app = express();
 
-app.use(helmet());
 app.use(
-  helmet({
-    contentSecurityPolicy: false,
+  helmet.contentSecurityPolicy({
+    directives:{
+      "defaultSrc": ["'self'"],
+      "scriptSrc": ["'self'","'trusted-cdn.com'"]
+    }
   }),
   helmet.hidePoweredBy(),
   helmet.hsts(
     {
-      maxAge: 86400,
-      includeSubDomains: false,
+      maxAge: ninetyDaysInSeconds, force: true
     }
   ),
   helmet.frameguard(
@@ -22,6 +25,9 @@ app.use(
   ),
   helmet.xssFilter(),
   helmet.noSniff(),
+  helmet.ieNoOpen(),
+  helmet.dnsPrefetchControl(),
+  helmet.noCache(),
 );
 
 app.get('/', (req,res) => {
