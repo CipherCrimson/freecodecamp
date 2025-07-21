@@ -1,5 +1,6 @@
 const express = require('express');
-const helmet =require('helmet')
+const bcrypt = require('bcrypt');
+const helmet = require('helmet');
 
 ninetyDaysInSeconds = 90*24*60*60;
 
