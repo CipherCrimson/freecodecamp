@@ -8,6 +8,7 @@ app.use(
   helmet({
     contentSecurityPolicy: false,
   }),
+  helmet.hidePoweredBy(),
   helmet.hsts(
     {
       maxAge: 86400,
