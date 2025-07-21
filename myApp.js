@@ -19,7 +19,8 @@ app.use(
     {
       action: "deny",
     }
-  )
+  ),
+  helmet.xssFilter(),
 );
 
 app.get('/', (req,res) => {
