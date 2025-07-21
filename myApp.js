@@ -4,6 +4,22 @@ const helmet =require('helmet')
 const app = express();
 
 app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  }),
+  helmet.hsts(
+    {
+      maxAge: 86400,
+      includeSubDomains: false,
+    }
+  ),
+  helmet.frameguard(
+    {
+      action: "deny",
+    }
+  )
+);
 
 app.get('/', (req,res) => {
   res.send('Hello Cipher');
