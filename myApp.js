@@ -21,6 +21,7 @@ app.use(
     }
   ),
   helmet.xssFilter(),
+  helmet.noSniff(),
 );
 
 app.get('/', (req,res) => {
